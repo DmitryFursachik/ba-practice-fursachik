@@ -1,5 +1,6 @@
-POST /api/v1/review/{product_id}
+POST api/v1/review
 {
+  "product_id": 1234,
   "user_id": 123,
   "review_time": "2023-09-09 09:41:01.2",
   "rating": 5,
@@ -9,8 +10,6 @@ POST /api/v1/review/{product_id}
     "url_to_review_image2.jpg"
   ]
 }
-
-
 
 {
   "success": true,
