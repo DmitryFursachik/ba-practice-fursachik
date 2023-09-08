@@ -1,0 +1,109 @@
+GET /api/product/123
+{
+  "product_id": 123,
+  "name": "Nando Muzi",
+  "description": "Описание товара",
+  "price_discounted": 16840,
+  "price_original": 24490,
+  "is_new": true,
+  "rating": {
+    "stars": 3.5,
+    "numeric": 3.5
+  },
+  "categories": [
+    "Женские туфли",
+    "Светло-коричневые",
+    "Артикул М4574003"
+  ],
+  "colors": [
+    {
+      "name": "Красный",
+      "image_url": "url_to_red_color_image.jpg",
+      "available_sizes": [
+        {
+          "size": "36/35",
+          "in_stock": true
+        },
+        {
+          "size": "37/36.5",
+          "in_stock": true
+        },
+        {
+          "size": "38/37",
+          "in_stock": false,
+          "notify_when_available": true
+        },
+        {
+          "size": "39/37.5",
+          "in_stock": true
+        }
+      ]
+    },
+ {
+      "name": "Синий",
+      "image_url": "url_to_blue_color_image.jpg",
+      "available_sizes": [
+        {
+          "size": "36/35",
+          "in_stock": true
+        },
+        {
+          "size": "37/36.5",
+          "in_stock": true
+        },
+        {
+          "size": "38/37",
+          "in_stock": true
+        },
+        {
+          "size": "39/37.5",
+          "in_stock": true
+        }
+      ]
+    },
+    // Другие доступные цвета
+  ],
+  "images_and_videos": [
+    {
+      "type": "image",
+      "url": "url_to_image1.jpg"
+    },
+    {
+      "type": "video",
+      "url": "url_to_video1.mp4"
+    },
+    // Другие изображения и видео
+  ],
+  "is_favorite": false,
+  "is_in_cart": false,
+  "reviews": {
+    "count": 235,
+    "average_rating": 3.5
+  },
+  "features": {
+    "close_button": true,
+    "share_button": true,
+    "reserve_in_store_button": true,
+    "product_info_button": true,
+    "store_availability_button": true,
+    "brand_info_button": true,
+    "repair_service_button": true,
+    "free_delivery_button": true,
+    "quality_certificates_button": true,
+    "write_review_button": true,
+    "see_all_reviews_button": true,
+    "ideas_for_outfit": {
+      "images_and_links": [
+        {
+          "type": "image",
+          "url": "url_to_outfit_image1.jpg"
+        },
+        {
+          "type": "link",
+          "url": "link_to_related_product1"
+        },
+        // Другие изображения и ссылки на товары
+      ]
+    }
+  }
+}

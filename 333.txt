@@ -1,0 +1,22 @@
+POST /api/reviews/{product_id}
+{
+  "product_image_url": "url_to_product_image.jpg",
+  "product_category": "Туфли",
+  "product_name": "Michel Vivien",
+  "price_discounted": 18150,
+  "price_original": 25690,
+  "rating": 5,
+  "review_text": "Отличные туфли! Очень комфортные и стильные.",
+  "review_images": [
+    "url_to_review_image1.jpg",
+    "url_to_review_image2.jpg"
+  ],
+  "is_review_complete": true
+}
+
+
+
+{
+  "success": true,
+  "message": "Отзыв успешно отправлен."
+}
