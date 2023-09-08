@@ -1,6 +1,7 @@
-GET /api/reviews/{product_id}
+GET /api/v1/review?product_id=123
 {
-"version": 1,
+"page": 1,
+"limit": 40,
 "reviews": 
   [
     {
