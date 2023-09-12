@@ -3,6 +3,57 @@ info:
   title: Swagger для Товара и отзывов
   description: Отзывы
   version: 1.0.0
+# Определение объекта "Информация о товаре"
+definitions:
+  ProductInfo:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: Уникальный идентификатор товара.
+      product_name:
+        type: string
+        description: Название товара.
+      product_description:
+        type: string
+        description: Описание товара.
+      product_price:
+        type: number
+        description: Цена товара.
+      product_reviews:
+        type: array
+        description: Список отзывов о товаре.
+        items:
+          $ref: '#/definitions/ProductReview'
+
+# Определение объекта "Отзыв о товаре"
+definitions:
+  ProductReview:
+    type: object
+    properties:
+      review_id:
+        type: string
+        description: Уникальный идентификатор отзыва.
+      user_name:
+        type: string
+        description: Имя пользователя.
+      rating:
+        type: integer
+        description: Оценка товара в звездах (целое число от 1 до 5).
+      review_text:
+        type: string
+        description: Текст отзыва.
+      review_date:
+        type: string
+        format: date
+        description: Дата отзыва (в формате YYYY-MM-DD).
+      review_images:
+        type: array
+        description: Ссылки на фотографии, прикрепленные к отзыву.
+        items:
+          type: string
+
+# Определение метода "Получение информации о карточке товара с отзывами"
 paths:
   /api/product/{product_id}:
     get:
@@ -23,54 +74,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product_info:
-                    type: object
-                    description: Информация о товаре.
-                    properties:
-                      product_id:
-                        type: string
-                        description: Уникальный идентификатор товара.
-                      product_name:
-                        type: string
-                        description: Название товара.
-                      product_description:
-                        type: string
-                        description: Описание товара.
-                      product_price:
-                        type: number
-                        description: Цена товара.
-                      product_reviews:
-                        type: array
-                        description: Список отзывов о товаре.
-                        items:
-                          type: object
-                          properties:
-                            review_id:
-                              type: string
-                              description: Уникальный идентификатор отзыва.
-                            user_name:
-                              type: string
-                              description: Имя пользователя.
-                            rating:
-                              type: integer
-                              description: Оценка товара в звездах (целое число от 1 до 5).
-                            review_text:
-                              type: string
-                              description: Текст отзыва.
-                            review_date:
-                              type: string
-                              format: date
-                              description: Дата отзыва (в формате YYYY-MM-DD).
-                            review_images:
-                              type: array
-                              description: Ссылки на фотографии, прикрепленные к отзыву.
-                              items:
-                                type: string
+                $ref: '#/definitions/ProductInfo'
         '404':
           description: Товар с указанным идентификатором не найден.
 
+# Определение метода "Получение всех отзывов"
+paths:
   /api/reviews/all:
     get:
       summary: Получение всех отзывов
@@ -89,26 +98,4 @@ paths:
                     type: array
                     description: Список всех отзывов.
                     items:
-                      type: object
-                      properties:
-                        review_id:
-                          type: string
-                          description: Уникальный идентификатор отзыва.
-                        user_name:
-                          type: string
-                          description: Имя пользователя.
-                        rating:
-                          type: integer
-                          description: Оценка товара в звездах (целое число от 1 до 5).
-                        review_text:
-                          type: string
-                          description: Текст отзыва.
-                        review_date:
-                          type: string
-                          format: date
-                          description: Дата отзыва (в формате YYYY-MM-DD).
-                        review_images:
-                          type: array
-                          description: Ссылки на фотографии, прикрепленные к отзыву.
-                          items:
-                            type: string
+                      $ref: '#/definitions/ProductReview'
