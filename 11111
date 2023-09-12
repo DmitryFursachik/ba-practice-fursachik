@@ -1,36 +1,114 @@
-Получение информации о карточке товара с отзывами
-Метод: GET
-Путь: /api/product/{product_id}
-Описание: Этот метод возвращает информацию о карточке товара вместе с отзывами, связанными с этим товаром.
-Параметры запроса:
-product_id (путь) - уникальный идентификатор товара.
+openapi: 3.0.0
+info:
+  title: Swagger для Товара и отзывов
+  description: Отзывы
+  version: 1.0.0
+paths:
+  /api/product/{product_id}:
+    get:
+      summary: Получение информации о карточке товара с отзывами
+      description: Этот метод возвращает информацию о карточке товара вместе с отзывами, связанными с этим товаром.
+      tags:
+        - Товары
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: Уникальный идентификатор товара.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешно получена информация о товаре с отзывами.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_info:
+                    type: object
+                    description: Информация о товаре.
+                    properties:
+                      product_id:
+                        type: string
+                        description: Уникальный идентификатор товара.
+                      product_name:
+                        type: string
+                        description: Название товара.
+                      product_description:
+                        type: string
+                        description: Описание товара.
+                      product_price:
+                        type: number
+                        description: Цена товара.
+                      product_reviews:
+                        type: array
+                        description: Список отзывов о товаре.
+                        items:
+                          type: object
+                          properties:
+                            review_id:
+                              type: string
+                              description: Уникальный идентификатор отзыва.
+                            user_name:
+                              type: string
+                              description: Имя пользователя.
+                            rating:
+                              type: integer
+                              description: Оценка товара в звездах (целое число от 1 до 5).
+                            review_text:
+                              type: string
+                              description: Текст отзыва.
+                            review_date:
+                              type: string
+                              format: date
+                              description: Дата отзыва (в формате YYYY-MM-DD).
+                            review_images:
+                              type: array
+                              description: Ссылки на фотографии, прикрепленные к отзыву.
+                              items:
+                                type: string
+        '404':
+          description: Товар с указанным идентификатором не найден.
 
-{
-  "product_info": {
-    "product_id": "12345",
-    "product_name": "Название товара",
-    "product_description": "Описание товара",
-    "product_price": 1999.99,
-    "product_reviews": [
-      {
-        "review_id": "1",
-        "user_name": "Пользователь 1",
-        "rating": 4,
-        "review_text": "Отличный товар!",
-        "review_date": "2023-09-01",
-        "review_images": [
-          "url_to_image1.jpg",
-          "url_to_image2.jpg"
-        ]
-      },
-      {
-        "review_id": "2",
-        "user_name": "Пользователь 2",
-        "rating": 5,
-        "review_text": "Замечательный товар!",
-        "review_date": "2023-09-02",
-        "review_images": []
-      }
-    ]
-  }
-}
+  /api/reviews/all:
+    get:
+      summary: Получение всех отзывов
+      description: Этот метод возвращает список всех отзывов, оставленных пользователями.
+      tags:
+        - Отзывы
+      responses:
+        '200':
+          description: Успешно получены все отзывы.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    description: Список всех отзывов.
+                    items:
+                      type: object
+                      properties:
+                        review_id:
+                          type: string
+                          description: Уникальный идентификатор отзыва.
+                        user_name:
+                          type: string
+                          description: Имя пользователя.
+                        rating:
+                          type: integer
+                          description: Оценка товара в звездах (целое число от 1 до 5).
+                        review_text:
+                          type: string
+                          description: Текст отзыва.
+                        review_date:
+                          type: string
+                          format: date
+                          description: Дата отзыва (в формате YYYY-MM-DD).
+                        review_images:
+                          type: array
+                          description: Ссылки на фотографии, прикрепленные к отзыву.
+                          items:
+                            type: string
