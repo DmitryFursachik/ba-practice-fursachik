@@ -1,15 +1,63 @@
-Отправка нового отзыва
-Метод: POST
-Путь: /api/reviews/new
-Описание: Этот метод позволяет пользователю отправить новый отзыв о товаре.
-Параметры запроса:
-product_id - уникальный идентификатор товара.
-user_name - имя пользователя.
-rating - оценка товара в звездах (целое число от 1 до 5).
-review_text - текст отзыва.
-review_images (по желанию) - массив ссылок на фотографии, прикрепленные к отзыву.
-Ответ:
-{
-  "success": true,
-  "message": "Отзыв успешно отправлен."
-}
+openapi: 3.0.0
+info:
+  title: Swagger для Отзывов
+  description: Отзывы
+  version: 1.0.0
+paths:
+  /api/reviews/new:
+    post:
+      summary: Отправка нового отзыва
+      description: Этот метод позволяет пользователю отправить новый отзыв о товаре.
+      tags:
+        - Отзывы
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  description: Уникальный идентификатор товара.
+                user_name:
+                  type: string
+                  description: Имя пользователя.
+                rating:
+                  type: integer
+                  description: Оценка товара в звездах (целое число от 1 до 5).
+                review_text:
+                  type: string
+                  description: Текст отзыва.
+                review_images:
+                  type: array
+                  items:
+                    type: string
+                    description: Ссылка на фотографию, прикрепленную к отзыву.
+      responses:
+        '200':
+          description: Успешно отправлен отзыв.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Успешно ли был отправлен отзыв.
+                  message:
+                    type: string
+                    description: Сообщение об успешной отправке отзыва.
+        '400':
+          description: Ошибка в запросе.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Успешно ли был отправлен отзыв.
+                  message:
+                    type: string
+                    description: Сообщение об ошибке в запросе.
