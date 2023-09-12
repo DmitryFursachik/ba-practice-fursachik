@@ -3,58 +3,65 @@ info:
   title: Swagger для Отзывов
   description: Отзывы
   version: 1.0.0
+Определение объекта "Отзыв о товаре"
+definitions:
+  ProductReview:
+    type: object
+    properties:
+      review_id:
+        type: string
+        description: Уникальный идентификатор отзыва.
+      user_name:
+        type: string
+        description: Имя пользователя.
+      rating:
+        type: integer
+        description: Оценка товара в звездах (целое число от 1 до 5).
+      review_text:
+        type: string
+        description: Текст отзыва.
+      review_date:
+        type: string
+        format: date
+        description: Дата отзыва (в формате YYYY-MM-DD).
+      review_images:
+        type: array
+        description: Ссылки на фотографии, прикрепленные к отзыву.
+        items:
+          type: string
+
+Определение метода "Получение всех отзывов"
 paths:
   /api/reviews/all:
     get:
       summary: Получение всех отзывов
       description: Этот метод возвращает список всех отзывов, оставленных пользователями.
       tags:
-        - Отзывы
-      responses:
-        '200':
-          description: Успешно получены все отзывы.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  reviews:
-                    type: array
-                    description: Список всех отзывов.
-                    items:
-                      type: object
-                      properties:
-                        review_id:
-                          type: string
-                          description: Уникальный идентификатор отзыва.
-                        user_name:
-                          type: string
-                          description: Имя пользователя.
-                        rating:
-                          type: integer
-                          description: Оценка товара в звездах (целое число от 1 до 5).
-                        review_text:
-                          type: string
-                          description: Текст отзыва.
-                        review_date:
-                          type: string
-                          format: date
-                          description: Дата отзыва (в формате YYYY-MM-DD).
-                        review_images:
-                          type: array
-                          description: Ссылки на фотографии, прикрепленные к отзыву.
-                          items:
-                            type: string
-        '400':
-          description: Ошибка в запросе.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    description: Успешно ли были получены отзывы.
-                  message:
-                    type: string
-                    description: Сообщение об ошибке в запросе.
+        
+Отзывы
+    responses:'200':
+        description: Успешно получены все отзывы.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reviews:
+                  type: array
+                  description: Список всех отзывов.
+                  items:$ref: '#/definitions/ProductReview''400':
+        description: Ошибка в запросе.
+        content:
+          application/json:
+            schema:$ref: '#/definitions/ErrorObject'
+Определение объекта "Объект ошибки"
+definitions:
+  ErrorObject:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: Успешно ли были получены отзывы.
+      message:
+        type: string
+        description: Сообщение об ошибке в запросе.
