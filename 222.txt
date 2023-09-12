@@ -1,25 +1,28 @@
-GET /api/v1/review?product_id=123
+Получение всех отзывов
+Метод: GET
+Путь: /api/reviews/all
+Описание: Этот метод возвращает список всех отзывов, оставленных пользователями.
+Ответ:
 {
-"page": 1,
-"limit": 40,
-"reviews": 
-  [
+  "reviews": [
     {
-      "rating": 5,
-      "user_name": "Иванова Мария",
-      "date": "2023-09-08",
-      "text": "Отличный товар! \nВсе очень понравилось!",
-      "product_image_urls": [
-        "s3.aws.surf.com/site1/reviews/123/pic_1",
-        "url_to_review_image2.jpg"
+      "review_id": "1",
+      "user_name": "Пользователь 1",
+      "rating": 4,
+      "review_text": "Отличный товар!",
+      "review_date": "2023-09-01",
+      "review_images": [
+        "url_to_image1.jpg",
+        "url_to_image2.jpg"
       ]
     },
     {
-      "rating": 4,
-      "user_name": "Петров Алексей",
-      "date": "2023-09-07",
-      "text": "Хороший товар, но доставка долгая.",
-      "product_image_urls": []
+      "review_id": "2",
+      "user_name": "Пользователь 2",
+      "rating": 5,
+      "review_text": "Замечательный товар!",
+      "review_date": "2023-09-02",
+      "review_images": []
     }
   ]
 }
