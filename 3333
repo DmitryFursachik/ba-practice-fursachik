@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Swagger для Отзывов
+  title: Swagger для нового отзыва
   description: Отзывы
   version: 1.0.0
 paths:
