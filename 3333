@@ -3,6 +3,30 @@ info:
   title: Swagger для нового отзыва
   description: Отзывы
   version: 1.0.0
+Определение объекта "Отзыв о товаре"
+definitions:
+  ProductReview:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: Уникальный идентификатор товара.
+      user_name:
+        type: string
+        description: Имя пользователя.
+      rating:
+        type: integer
+        description: Оценка товара в звездах (целое число от 1 до 5).
+      review_text:
+        type: string
+        description: Текст отзыва.
+      review_images:
+        type: array
+        items:
+          type: string
+          description: Ссылка на фотографию, прикрепленную к отзыву.
+
+# Определение метода "Отправка нового отзыва"
 paths:
   /api/reviews/new:
     post:
@@ -15,25 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                product_id:
-                  type: string
-                  description: Уникальный идентификатор товара.
-                user_name:
-                  type: string
-                  description: Имя пользователя.
-                rating:
-                  type: integer
-                  description: Оценка товара в звездах (целое число от 1 до 5).
-                review_text:
-                  type: string
-                  description: Текст отзыва.
-                review_images:
-                  type: array
-                  items:
-                    type: string
-                    description: Ссылка на фотографию, прикрепленную к отзыву.
+              $ref: '#/definitions/ProductReview'
       responses:
         '200':
           description: Успешно отправлен отзыв.
@@ -53,11 +59,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    description: Успешно ли был отправлен отзыв.
-                  message:
-                    type: string
-                    description: Сообщение об ошибке в запросе.
+                $ref: '#/definitions/ErrorObject'
+
+# Определение объекта "Объект ошибки"
+definitions:
+  ErrorObject:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: Успешно ли был отправлен отзыв.
+      message:
+        type: string
+        description: Сообщение об ошибке в запросе.
